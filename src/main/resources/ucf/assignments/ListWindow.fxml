@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.ToDoListController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#saveToExternal" text="Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadFromExternal" text="Load" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Display">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#displayAll" text="Display All" />
+                  <MenuItem mnemonicParsing="false" onAction="#displayComplete" text="Display Complete" />
+                  <MenuItem mnemonicParsing="false" onAction="#displayIncomplete" text="Display Incomplete" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" onAction="#openHelpWindow" text="Help" />
+        </menus>
+      </MenuBar>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="74.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <DatePicker fx:id="selectDate" layoutX="9.0" layoutY="8.0" prefHeight="26.0" prefWidth="121.0" promptText="Select Date..." />
+            <TextField fx:id="descriptionText" layoutX="139.0" layoutY="8.0" prefHeight="26.0" prefWidth="453.0" promptText="Enter Task Description..." />
+            <Button fx:id="addButton" layoutX="9.0" layoutY="42.0" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="26.0" prefWidth="135.0" text="Add Task" />
+            <Button fx:id="deleteButton" layoutX="152.0" layoutY="42.0" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="26.0" prefWidth="140.0" text="Delete Task" />
+            <Button fx:id="markCompleteButton" layoutX="300.0" layoutY="42.0" mnemonicParsing="false" onAction="#markTaskCompleteClicked" prefHeight="26.0" prefWidth="148.0" text="Mark Task Complete" />
+            <Button fx:id="clearButton" layoutX="456.0" layoutY="42.0" mnemonicParsing="false" onAction="#clearButtonClicked" prefHeight="26.0" prefWidth="136.0" text="Clear" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <SplitPane fx:id="splitPane" dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutX="131.0" layoutY="5.0" text="To-Do" textAlignment="CENTER" />
+                  <ListView fx:id="taskList" layoutX="-2.0" layoutY="29.0" prefHeight="270.0" prefWidth="296.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutX="103.0" layoutY="5.0" text="Completed Tasks" textAlignment="CENTER" />
+                  <ListView fx:id="completedList" layoutX="-2.0" layoutY="29.0" prefHeight="270.0" prefWidth="296.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>
