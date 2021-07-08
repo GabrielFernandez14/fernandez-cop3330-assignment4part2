@@ -6,33 +6,15 @@
 package ucf.assignments;
 
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import java.lang.String;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 import java.time.LocalDate;
 
-// Figure out how to implement additions to the specific table column
-// refresh the textview/datepicker/errorlabel for new input
-
 public class AddTask {
-    @FXML
-    private TableColumn<NewTask, String> dateCol;
-    @FXML
-    private TableColumn<NewTask, String> descriptionCol;
 
-
-    public void addNewTask(TableView<NewTask> taskList,
+    public void addNewTask(ListView<NewTask> taskList,
                            TextField description, DatePicker date,
                            Label errorLabel, ObservableList<NewTask> list) {
         // Check that input from TextField is valid
@@ -42,10 +24,15 @@ public class AddTask {
         }
     }
 
+    // Check that the input provided is valid
     public boolean inputIsValid(Label errorLabel, TextField description, DatePicker date) {
-        // Check that the TextField is not empty
 
-        if (description.getText().equals("")) {
+        if (date.getValue().isBefore(LocalDate.now())) {
+            errorMessage(errorLabel, "Error: Date has already passed.");
+            return false;
+        }
+        // Check that the TextField is not empty
+        else if (description.getText().equals("")) {
             errorMessage(errorLabel, "Error: Description is empty.");
             return false;
         }
@@ -54,21 +41,18 @@ public class AddTask {
             errorMessage(errorLabel, "Error: Description exceeds character limit.");
             return false;
         }
-        else if (date.getValue().isBefore(LocalDate.now())) {
-            errorMessage(errorLabel, "Error: Date has already passed.");
-            return false;
-        }
 
         return true;
     }
 
-    public void commitNewTask(Label errorLabel, TableView<NewTask> taskList,
+    // Add the data to the list
+    public void commitNewTask(Label errorLabel, ListView<NewTask> taskList,
                               TextField description, DatePicker date,
                               ObservableList<NewTask> list) {
         // Add the data to an ArrayList
         list.add(new NewTask(description.getText(), date.getValue()));
-        // Add the ArrayList data to the appropriate columns in the TableView
-
+        // Add the ArrayList data to the ListView
+        taskList.setItems(list);
         // Reset the value inside of the TextField and DataPicker to today's date
         // for new input
         description.setText("");

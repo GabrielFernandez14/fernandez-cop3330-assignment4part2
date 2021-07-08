@@ -3,12 +3,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -53,23 +52,13 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <Label alignment="CENTER" layoutX="131.0" layoutY="5.0" text="To-Do" textAlignment="CENTER" />
-                  <TableView fx:id="taskList" layoutX="-3.0" layoutY="30.0" prefHeight="268.0" prefWidth="299.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
-                    <columns>
-                      <TableColumn fx:id="dateTaskCol" prefWidth="91.2000122666359" text="Date" />
-                      <TableColumn fx:id="descriptionTaskCol" prefWidth="205.5999755859375" text="Description" />
-                    </columns>
-                  </TableView>
+                  <ListView fx:id="taskList" layoutX="-2.0" layoutY="29.0" prefHeight="242.0" prefWidth="298.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <Label alignment="CENTER" layoutX="103.0" layoutY="5.0" text="Completed Tasks" textAlignment="CENTER" />
-                  <TableView fx:id="completedList" layoutY="30.0" prefHeight="268.0" prefWidth="297.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
-                     <columns>
-                        <TableColumn fx:id="dateCompleteCol" prefWidth="91.2000122666359" text="Date" />
-                        <TableColumn fx:id="descriptionCompleteCol" prefWidth="205.5999755859375" text="Description" />
-                     </columns>
-                  </TableView>
+                  <ListView fx:id="completedList" layoutY="29.0" prefHeight="242.0" prefWidth="297.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0" />
                </children>
             </AnchorPane>
         </items>

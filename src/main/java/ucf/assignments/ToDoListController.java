@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 import java.time.LocalDate;
@@ -21,7 +22,6 @@ public class ToDoListController {
     private BorderPane mainPane;
     @FXML
     private SplitPane splitPane;
-    // Error label is being weird
     @FXML
     private Label errorLabel;
     @FXML
@@ -37,12 +37,12 @@ public class ToDoListController {
     @FXML
     private Button clearButton;
     @FXML
-    private TableView<NewTask> taskList;
+    private ListView<NewTask> taskList;
     @FXML
-    private TableView<NewTask> completedList;
+    private ListView<NewTask> completedList;
 
     ObservableList<NewTask> list = FXCollections.observableArrayList();
-    ObservableList<NewTask> listComplete = FXCollections.observableArrayList();
+    ObservableList<NewTask> completed = FXCollections.observableArrayList();
 
     @FXML
     public void saveToExternal(ActionEvent actionEvent) {
@@ -82,7 +82,28 @@ public class ToDoListController {
 
     @FXML
     public void markTaskCompleteClicked(ActionEvent actionEvent) {
+        // Create a new instance of class MarkComplete
+        MarkComplete complete = new MarkComplete();
+        // call markTaskComplete() function
+        complete.markTaskComplete(list, taskList, completed, completedList);
     }
+
+    /*
+    @FXML
+    public void listClicked(MouseEvent mouseEvent) {
+        //deleteButton.setDisable(list.isEmpty());
+        markCompleteButton.setDisable(list.isEmpty());
+        taskList.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    public void completedLIstClicked(MouseEvent mouseEvent) {
+        //deleteButton.setDisable(completed.isEmpty());
+        markCompleteButton.setDisable(completed.isEmpty());
+        completedList.getSelectionModel().clearSelection();
+    }
+     */
+
 
     @FXML
     public void clearButtonClicked(ActionEvent actionEvent) {

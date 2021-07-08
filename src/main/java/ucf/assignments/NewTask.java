@@ -9,24 +9,17 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 // Creates a new instance of a task for the list
-@SuppressWarnings("serial")
 public class NewTask implements Serializable {
     private LocalDate date;
     private String description;
+    private boolean isComplete;
 
     // Specify as a new element using 'this.'
     public NewTask(String description, LocalDate date) {
-        super();
         this.description = description;
         this.date = date;
+        this.isComplete = false;
     }
-
-
-    @Override
-    public String toString() {
-        return date.toString();
-    }
-
 
     // getter and setter for date
     public LocalDate getDate() {
@@ -44,5 +37,18 @@ public class NewTask implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isCompleted() {
+        return isComplete;
+    }
+
+    public void setCompleted(boolean isComplete) {
+        this.isComplete = isComplete;
+    }
+
+    @Override
+    public String toString() {
+        return date.toString() + " |\t"+ description;
     }
 }
