@@ -16,20 +16,17 @@ public class NewTask implements Serializable {
 
     // Specify as a new element using 'this.'
     public NewTask(String description, LocalDate date) {
+        super();
         this.description = description;
         this.date = date;
     }
 
-    /*
+
     @Override
     public String toString() {
-        String[] dateArray = null;
-
-        if (date != null) {
-            dateArray = date.toString();
-        }
+        return date.toString();
     }
-     */
+
 
     // getter and setter for date
     public LocalDate getDate() {

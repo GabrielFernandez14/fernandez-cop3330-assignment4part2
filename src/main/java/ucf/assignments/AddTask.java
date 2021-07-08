@@ -6,6 +6,7 @@
 package ucf.assignments;
 
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -14,6 +15,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import java.lang.String;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -23,6 +26,12 @@ import java.time.LocalDate;
 // refresh the textview/datepicker/errorlabel for new input
 
 public class AddTask {
+    @FXML
+    private TableColumn<NewTask, String> dateCol;
+
+    @FXML
+    private TableColumn<NewTask, String> descriptionCol;
+
 
     public void addNewTask(TableView<NewTask> taskList,
                            TextField description, DatePicker date,
@@ -46,6 +55,8 @@ public class AddTask {
             return false;
         }
 
+
+
         return true;
     }
 
@@ -54,23 +65,9 @@ public class AddTask {
                               ObservableList<NewTask> list) {
         // Add the data to an ArrayList
         list.add(new NewTask(description.getText(), date.getValue()));
-        // columns need to be initialized before we can call on them and set
-        // their values
-
         // Add the ArrayList data to the appropriate columns in the TableView
         taskList.setItems(list);
-        /*
-        final HBox hb = new HBox();
-        hb.getChildren().addAll(description, date);
-        hb.setSpacing(3);
-
-        final VBox vbox = new VBox();
-        vbox.setSpacing(5);
-        vbox.setPadding(new Insets(10, 0, 0, 10));
-        vbox.getChildren().addAll(description, date, hb);
-
-        ((Group) scene.getRoot()).getChildren().addAll(vbox);
-         */
+        taskList.getItems();
 
         // Reset the value inside of the TextField and DataPicker to today's date
         // for new input
@@ -81,5 +78,6 @@ public class AddTask {
 
     public void errorMessage(Label errorLabel, String prompt) {
         errorLabel.setText(prompt);
+        errorLabel.setTextFill(Color.RED);
     }
 }

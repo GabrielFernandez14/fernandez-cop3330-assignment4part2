@@ -12,8 +12,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.cell.*?>
-
 
 <BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.ToDoListController">
    <top>
@@ -45,7 +43,7 @@
             <Button fx:id="deleteButton" layoutX="152.0" layoutY="42.0" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="26.0" prefWidth="140.0" text="Delete Task" />
             <Button fx:id="markCompleteButton" layoutX="300.0" layoutY="42.0" mnemonicParsing="false" onAction="#markTaskCompleteClicked" prefHeight="26.0" prefWidth="148.0" text="Mark Task Complete" />
             <Button fx:id="clearButton" layoutX="456.0" layoutY="42.0" mnemonicParsing="false" onAction="#clearButtonClicked" prefHeight="26.0" prefWidth="136.0" text="Clear" />
-            <Label fx:id="errorLabel" layoutX="172.0" layoutY="79.0" prefHeight="18.0" prefWidth="255.0" />
+            <Label fx:id="errorLabel" alignment="CENTER" layoutX="172.0" layoutY="79.0" prefHeight="18.0" prefWidth="255.0" textAlignment="CENTER" />
          </children>
       </AnchorPane>
    </bottom>
@@ -57,8 +55,8 @@
                   <Label alignment="CENTER" layoutX="131.0" layoutY="5.0" text="To-Do" textAlignment="CENTER" />
                   <TableView fx:id="taskList" layoutX="-3.0" layoutY="30.0" prefHeight="268.0" prefWidth="299.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                     <columns>
-                      <TableColumn prefWidth="91.2000122666359" text="Date" />
-                      <TableColumn prefWidth="205.5999755859375" text="Description" />
+                      <TableColumn fx:id="dateTaskCol" prefWidth="91.2000122666359" text="Date" />
+                      <TableColumn fx:id="descriptionTaskCol" prefWidth="205.5999755859375" text="Description" />
                     </columns>
                   </TableView>
                </children>
@@ -68,8 +66,8 @@
                   <Label alignment="CENTER" layoutX="103.0" layoutY="5.0" text="Completed Tasks" textAlignment="CENTER" />
                   <TableView fx:id="completedList" layoutY="30.0" prefHeight="268.0" prefWidth="297.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                      <columns>
-                        <TableColumn prefWidth="91.2000122666359" text="Date" />
-                        <TableColumn prefWidth="205.5999755859375" text="Description" />
+                        <TableColumn fx:id="dateCompleteCol" prefWidth="91.2000122666359" text="Date" />
+                        <TableColumn fx:id="descriptionCompleteCol" prefWidth="205.5999755859375" text="Description" />
                      </columns>
                   </TableView>
                </children>
