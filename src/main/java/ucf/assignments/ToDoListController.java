@@ -12,11 +12,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 
+import java.time.LocalDate;
+
 public class ToDoListController {
     @FXML
     private BorderPane mainPane;
     @FXML
     private SplitPane splitPane;
+    // Error label is being weird
+    @FXML
+    private java.awt.Label errorLabel;
     @FXML
     private DatePicker selectDate;
     @FXML
@@ -30,12 +35,12 @@ public class ToDoListController {
     @FXML
     private Button clearButton;
     @FXML
-    private ListView<ToDoTask> taskList;
+    private TableView<NewTask> taskList;
     @FXML
-    private ListView<ToDoTask> completedList;
+    private TableView<NewTask> completedList;
 
-    ObservableList<ToDoTask> list = FXCollections.observableArrayList();
-    ObservableList<ToDoTask> listComplete = FXCollections.observableArrayList();
+    ObservableList<NewTask> list = FXCollections.observableArrayList();
+    ObservableList<NewTask> listComplete = FXCollections.observableArrayList();
 
     @FXML
     public void saveToExternal(ActionEvent actionEvent) {
@@ -63,6 +68,10 @@ public class ToDoListController {
 
     @FXML
     public void addButtonClicked(ActionEvent actionEvent) {
+        // Create a new instance of AddTask Class
+        AddTask task = new AddTask();
+        // Call addNewTask() function inside of AddTask
+        task.addNewTask(taskList, descriptionText, selectDate, errorLabel, list);
     }
 
     @FXML
