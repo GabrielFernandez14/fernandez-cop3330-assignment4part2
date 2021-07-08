@@ -28,7 +28,6 @@ import java.time.LocalDate;
 public class AddTask {
     @FXML
     private TableColumn<NewTask, String> dateCol;
-
     @FXML
     private TableColumn<NewTask, String> descriptionCol;
 
@@ -37,14 +36,15 @@ public class AddTask {
                            TextField description, DatePicker date,
                            Label errorLabel, ObservableList<NewTask> list) {
         // Check that input from TextField is valid
-        if (inputIsValid(errorLabel, description)) {
+        if (inputIsValid(errorLabel, description, date)) {
             // Add the task to the TableView
             commitNewTask(errorLabel, taskList, description, date, list);
         }
     }
 
-    public boolean inputIsValid(Label errorLabel, TextField description) {
+    public boolean inputIsValid(Label errorLabel, TextField description, DatePicker date) {
         // Check that the TextField is not empty
+
         if (description.getText().equals("")) {
             errorMessage(errorLabel, "Error: Description is empty.");
             return false;
@@ -54,8 +54,10 @@ public class AddTask {
             errorMessage(errorLabel, "Error: Description exceeds character limit.");
             return false;
         }
-
-
+        else if (date.getValue().isBefore(LocalDate.now())) {
+            errorMessage(errorLabel, "Error: Date has already passed.");
+            return false;
+        }
 
         return true;
     }
@@ -66,8 +68,6 @@ public class AddTask {
         // Add the data to an ArrayList
         list.add(new NewTask(description.getText(), date.getValue()));
         // Add the ArrayList data to the appropriate columns in the TableView
-        taskList.setItems(list);
-        taskList.getItems();
 
         // Reset the value inside of the TextField and DataPicker to today's date
         // for new input

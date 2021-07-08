@@ -72,7 +72,6 @@ public class ToDoListController {
     public void addButtonClicked(ActionEvent actionEvent) {
         // Create a new instance of AddTask Class
         AddTask task = new AddTask();
-        Scene scene = mainPane.getScene();
         // Call addNewTask() function inside of AddTask
         task.addNewTask(taskList, descriptionText, selectDate, errorLabel, list);
     }
