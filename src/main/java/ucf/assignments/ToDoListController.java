@@ -9,7 +9,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
 import java.time.LocalDate;
@@ -21,7 +23,7 @@ public class ToDoListController {
     private SplitPane splitPane;
     // Error label is being weird
     @FXML
-    private java.awt.Label errorLabel;
+    private Label errorLabel;
     @FXML
     private DatePicker selectDate;
     @FXML
@@ -70,6 +72,8 @@ public class ToDoListController {
     public void addButtonClicked(ActionEvent actionEvent) {
         // Create a new instance of AddTask Class
         AddTask task = new AddTask();
+        list = taskList.getItems();
+        Scene scene = mainPane.getScene();
         // Call addNewTask() function inside of AddTask
         task.addNewTask(taskList, descriptionText, selectDate, errorLabel, list);
     }
