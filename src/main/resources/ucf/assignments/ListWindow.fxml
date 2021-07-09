@@ -29,7 +29,6 @@
                   <MenuItem mnemonicParsing="false" onAction="#displayIncomplete" text="Display Incomplete" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" onAction="#openHelpWindow" text="Help" />
         </menus>
       </MenuBar>
    </top>
