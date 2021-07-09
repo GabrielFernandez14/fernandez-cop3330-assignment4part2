@@ -9,43 +9,60 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.io.IOException;
+import java.util.Objects;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import java.time.LocalDate;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Objects;
+
+import static javafx.application.Application.launch;
 
 public class ToDoListController {
     @FXML
-    private BorderPane mainPane;
+    public BorderPane mainPane;
     @FXML
-    private SplitPane splitPane;
+    public SplitPane splitPane;
     @FXML
-    private Label errorLabel;
+    public Label errorLabel;
     @FXML
-    private DatePicker selectDate;
+    public DatePicker selectDate;
     @FXML
-    private TextField descriptionText;
+    public TextField descriptionText;
     @FXML
-    private Button addButton;
+    public Button addButton;
     @FXML
-    private Button deleteButton;
+    public Button deleteButton;
     @FXML
-    private Button markCompleteButton;
+    public Button markCompleteButton;
     @FXML
-    private Button clearButton;
+    public Button clearButton;
     @FXML
-    private ListView<NewTask> taskList;
+    public ListView<NewTask> taskList;
     @FXML
-    private ListView<NewTask> completedList;
+    public ListView<NewTask> completedList;
 
-    ObservableList<NewTask> list = FXCollections.observableArrayList();
-    ObservableList<NewTask> completed = FXCollections.observableArrayList();
+    public ObservableList<NewTask> list = FXCollections.observableArrayList();
+    public ObservableList<NewTask> completed = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
         selectDate.setValue(LocalDate.now());
         descriptionText.setText("");
+        errorLabel.setText("");
+        // I tried to make the SplitPane divider uneditable
+        // but couldn't figure it out :/
     }
 
     @FXML
@@ -59,24 +76,25 @@ public class ToDoListController {
     @FXML
     public void displayAll(ActionEvent actionEvent) {
         // Create a new instance of class DisplayList
+        DisplayList display = new DisplayList();
         // call displayAll()
+        display.displayAll(splitPane);
     }
 
     @FXML
     public void displayComplete(ActionEvent actionEvent) {
         // Create a new instance of class DisplayList
+        DisplayList display = new DisplayList();
         // call displayComplete()
+        display.displayComplete(splitPane);
     }
 
     @FXML
     public void displayIncomplete(ActionEvent actionEvent) {
         // Create a new instance of class DisplayList
+        DisplayList display = new DisplayList();
         // call displayIncomplete()
-    }
-
-    @FXML
-    public void openHelpWindow(ActionEvent actionEvent) {
-        // Basically repeat what is in main, but with a new .fxml
+        display.displayIncomplete(splitPane);
     }
 
     @FXML
