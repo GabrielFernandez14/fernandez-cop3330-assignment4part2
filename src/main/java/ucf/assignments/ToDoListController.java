@@ -58,18 +58,25 @@ public class ToDoListController {
 
     @FXML
     public void displayAll(ActionEvent actionEvent) {
+        // Create a new instance of class DisplayList
+        // call displayAll()
     }
 
     @FXML
     public void displayComplete(ActionEvent actionEvent) {
+        // Create a new instance of class DisplayList
+        // call displayComplete()
     }
 
     @FXML
     public void displayIncomplete(ActionEvent actionEvent) {
+        // Create a new instance of class DisplayList
+        // call displayIncomplete()
     }
 
     @FXML
     public void openHelpWindow(ActionEvent actionEvent) {
+        // Basically repeat what is in main, but with a new .fxml
     }
 
     @FXML
@@ -88,7 +95,6 @@ public class ToDoListController {
         delete.deleteSelectedTask(list, taskList, completed, completedList);
     }
 
-    // NOT WORKING YET, COME BACK TO THIS
     @FXML
     public void markTaskCompleteClicked(ActionEvent actionEvent) {
         // Create a new instance of class MarkComplete
@@ -97,26 +103,11 @@ public class ToDoListController {
         complete.markTaskComplete(list, taskList, completed, completedList);
     }
 
-    /*
-    Not sure if I need to implement these or not
-
-    @FXML
-    public void listClicked(MouseEvent mouseEvent) {
-        //deleteButton.setDisable(list.isEmpty());
-        markCompleteButton.setDisable(list.isEmpty());
-        taskList.getSelectionModel().clearSelection();
-    }
-
-    @FXML
-    public void completedLIstClicked(MouseEvent mouseEvent) {
-        //deleteButton.setDisable(completed.isEmpty());
-        markCompleteButton.setDisable(completed.isEmpty());
-        completedList.getSelectionModel().clearSelection();
-    }
-     */
-
-
     @FXML
     public void clearButtonClicked(ActionEvent actionEvent) {
+        // Create a new instance of ClearList
+        ClearList clear = new ClearList();
+        // call clearAll()
+        clear.clearAll(list, taskList, completed, completedList);
     }
 }

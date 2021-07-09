@@ -40,7 +40,7 @@
             <TextField fx:id="descriptionText" layoutX="139.0" layoutY="8.0" prefHeight="26.0" prefWidth="453.0" promptText="Enter Task Description..." />
             <Button fx:id="addButton" layoutX="9.0" layoutY="42.0" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="26.0" prefWidth="135.0" text="Add Task" />
             <Button fx:id="deleteButton" layoutX="152.0" layoutY="42.0" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="26.0" prefWidth="140.0" text="Delete Task" />
-            <Button fx:id="markCompleteButton" layoutX="300.0" layoutY="42.0" mnemonicParsing="false" onAction="#markTaskCompleteClicked" prefHeight="26.0" prefWidth="148.0" text="Mark Task Complete" />
+            <Button fx:id="markCompleteButton" layoutX="300.0" layoutY="42.0" mnemonicParsing="false" onAction="#markTaskCompleteClicked" prefHeight="26.0" prefWidth="148.0" text="Mark Task (In)Complete" />
             <Button fx:id="clearButton" layoutX="456.0" layoutY="42.0" mnemonicParsing="false" onAction="#clearButtonClicked" prefHeight="26.0" prefWidth="136.0" text="Clear" />
             <Label fx:id="errorLabel" alignment="CENTER" layoutX="172.0" layoutY="79.0" prefHeight="18.0" prefWidth="255.0" textAlignment="CENTER" />
          </children>

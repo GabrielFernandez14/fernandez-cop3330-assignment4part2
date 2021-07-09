@@ -49,6 +49,6 @@ public class NewTask implements Serializable {
 
     @Override
     public String toString() {
-        return date.toString() + "\t|||\t"+ description;
+        return date.toString() + "\t||\t"+ description;
     }
 }

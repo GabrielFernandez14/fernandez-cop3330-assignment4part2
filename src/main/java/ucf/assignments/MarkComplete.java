@@ -7,10 +7,9 @@ package ucf.assignments;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
-import java.time.LocalDate;
 
 public class MarkComplete {
-
+    // Mark the selected item as complete (or incomplete)
     public void markTaskComplete(ObservableList<NewTask> list, ListView<NewTask> taskList,
                                  ObservableList<NewTask> completedList, ListView<NewTask> taskCompletedList) {
 
@@ -18,10 +17,10 @@ public class MarkComplete {
         NewTask curTask = null;
 
         // Check if a value is highlighted by the user and get that item
-        if (taskList.isFocused()) {
+        if (taskList.getSelectionModel().getSelectedItem() != null) {
             curTask = taskList.getSelectionModel().getSelectedItem();
         }
-        else if (taskCompletedList.isFocused()) {
+        else if (taskCompletedList.getSelectionModel().getSelectedItem() != null) {
             curTask = taskCompletedList.getSelectionModel().getSelectedItem();
         }
 
@@ -35,8 +34,8 @@ public class MarkComplete {
                 completedList.remove(curTask);
                 list.add(curTask);
                 curTask.setCompleted(false);
-                curTask.setDate(null);
                 taskList.setItems(list);
+
             }
             else {
                 // If the item is not in the normal ListView, mark as complete
@@ -45,9 +44,12 @@ public class MarkComplete {
                 list.remove(curTask);
                 completedList.add(curTask);
                 curTask.setCompleted(true);
-                curTask.setDate(LocalDate.now());
                 taskCompletedList.setItems(completedList);
+
             }
+
+            taskList.getSelectionModel().clearSelection();
+            taskCompletedList.getSelectionModel().clearSelection();
         }
     }
 }
