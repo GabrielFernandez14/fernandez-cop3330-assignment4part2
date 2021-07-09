@@ -9,13 +9,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-
 import java.time.LocalDate;
+
 
 public class ToDoListController {
     @FXML
@@ -43,6 +41,12 @@ public class ToDoListController {
 
     ObservableList<NewTask> list = FXCollections.observableArrayList();
     ObservableList<NewTask> completed = FXCollections.observableArrayList();
+
+    @FXML
+    public void initialize() {
+        selectDate.setValue(LocalDate.now());
+        descriptionText.setText("");
+    }
 
     @FXML
     public void saveToExternal(ActionEvent actionEvent) {
@@ -78,8 +82,13 @@ public class ToDoListController {
 
     @FXML
     public void deleteButtonClicked(ActionEvent actionEvent) {
+        // Create a new instance of class DeleteTask
+        DeleteTask delete = new DeleteTask();
+        // Call deleteSelectedTask() inside of the class
+        delete.deleteSelectedTask(list, taskList, completed, completedList);
     }
 
+    // NOT WORKING YET, COME BACK TO THIS
     @FXML
     public void markTaskCompleteClicked(ActionEvent actionEvent) {
         // Create a new instance of class MarkComplete
@@ -89,6 +98,8 @@ public class ToDoListController {
     }
 
     /*
+    Not sure if I need to implement these or not
+
     @FXML
     public void listClicked(MouseEvent mouseEvent) {
         //deleteButton.setDisable(list.isEmpty());

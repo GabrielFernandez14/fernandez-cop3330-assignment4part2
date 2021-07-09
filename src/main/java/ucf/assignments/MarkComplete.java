@@ -13,7 +13,8 @@ public class MarkComplete {
 
     public void markTaskComplete(ObservableList<NewTask> list, ListView<NewTask> taskList,
                                  ObservableList<NewTask> completedList, ListView<NewTask> taskCompletedList) {
-        // Create a new NewTask
+
+        // Get selected list item
         NewTask curTask = null;
 
         // Check if a value is highlighted by the user and get that item
@@ -29,7 +30,7 @@ public class MarkComplete {
             // Check if the item is already in the completed ListView
             if (curTask.isCompleted()) {
                 // The item is marked as complete already, so mark as incomplete
-                // add the data from the ObservableList completed into the ObservableList
+                // add the data from the completed list into the task
                 // list and set to the correct ListView
                 completedList.remove(curTask);
                 list.add(curTask);
@@ -39,8 +40,8 @@ public class MarkComplete {
             }
             else {
                 // If the item is not in the normal ListView, mark as complete
-                // add the data from the ObservableList list into the ObservableList
-                // completed and set to the correct ListView
+                // add the data from the task list into the completed
+                // list and set to the correct ListView
                 list.remove(curTask);
                 completedList.add(curTask);
                 curTask.setCompleted(true);

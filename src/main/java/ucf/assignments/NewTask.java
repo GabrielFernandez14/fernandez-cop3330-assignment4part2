@@ -35,7 +35,7 @@ public class NewTask implements Serializable {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription (String description) {
         this.description = description;
     }
 
@@ -43,12 +43,12 @@ public class NewTask implements Serializable {
         return isComplete;
     }
 
-    public void setCompleted(boolean isComplete) {
+    public void setCompleted (boolean isComplete) {
         this.isComplete = isComplete;
     }
 
     @Override
     public String toString() {
-        return date.toString() + " |\t"+ description;
+        return date.toString() + "\t|||\t"+ description;
     }
 }
