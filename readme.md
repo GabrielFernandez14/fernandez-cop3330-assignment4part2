@@ -36,6 +36,9 @@ so the item that is currently inside the To-Do table will be moved to the Comple
 Pressing this button clears all data inside of both the To-Do and Completed tables.
 
 ### Editing the Tables
+The user can edit the table's contents by first selecting an item within either table,
+then pressing the Edit Task button. This will open a new window where the user can then
+input their desired changes, and confirm the edit with a Confirm button.
 
 ### Using the Display Menu
 #### Display All

@@ -9,25 +9,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import java.io.IOException;
-import java.util.Objects;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
-
-import static javafx.application.Application.launch;
 
 public class ToDoListController {
     @FXML
@@ -49,12 +42,24 @@ public class ToDoListController {
     @FXML
     public Button clearButton;
     @FXML
+    public Button editTaskButton;
+    @FXML
     public ListView<NewTask> taskList;
     @FXML
     public ListView<NewTask> completedList;
+    @FXML
+    public DatePicker editDate;
+    @FXML
+    public TextField editDescription;
+    @FXML
+    public Button confirmEditButton;
 
     public ObservableList<NewTask> list = FXCollections.observableArrayList();
     public ObservableList<NewTask> completed = FXCollections.observableArrayList();
+
+    public NewTask curTask = null;
+    public final Stage newStage = new Stage();
+
 
     @FXML
     public void initialize() {
@@ -63,6 +68,8 @@ public class ToDoListController {
         errorLabel.setText("");
         // I tried to make the SplitPane divider uneditable
         // but couldn't figure it out :/
+        // Node divider = splitPane.lookup(".split-pane-divider");
+        // divider.setMouseTransparent(true);
     }
 
     @FXML
@@ -121,11 +128,66 @@ public class ToDoListController {
         complete.markTaskComplete(list, taskList, completed, completedList);
     }
 
+    // NOT WORKING
+    @FXML
+    public void editButtonClicked() {
+        if (taskList.getSelectionModel().getSelectedItem() != null) {
+            launchEditWindow();
+        }
+        else if (completedList.getSelectionModel().getSelectedItem() != null &&
+                taskList.getSelectionModel().getSelectedItem() == null) {
+            launchEditWindow();
+        }
+        else {
+            printError(errorLabel, "Error: You must select a task before you can edit.");
+        }
+    }
+
+    // NOT WORKING
+    public void launchEditWindow() {
+
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull
+                    (getClass().getResource("EditTaskWindow.fxml")));
+
+            Scene scene = new Scene(root);
+
+            newStage.setScene(scene);
+            newStage.setTitle("Edit Task");
+            newStage.setResizable(false);
+            newStage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     public void clearButtonClicked(ActionEvent actionEvent) {
         // Create a new instance of ClearList
         ClearList clear = new ClearList();
         // call clearAll()
         clear.clearAll(list, taskList, completed, completedList);
+    }
+
+    public void printError(Label errorLabel, String prompt) {
+        errorLabel.setText(prompt);
+        errorLabel.setTextFill(Color.RED);
+    }
+
+    // NOT WORKING
+    @FXML
+    public void confirmEditClicked(ActionEvent actionEvent) {
+        EditTask edit = new EditTask();
+
+        if (taskList.getSelectionModel().getSelectedItem() != null) {
+            curTask = taskList.getSelectionModel().getSelectedItem();
+            edit.editCurTask(list, taskList, editDescription, editDate, curTask);
+        }
+        else if (completedList.getSelectionModel().getSelectedItem() != null &&
+                taskList.getSelectionModel().getSelectedItem() != null) {
+            curTask = completedList.getSelectionModel().getSelectedItem();
+            edit.editCurTask(completed, completedList, editDescription, editDate,  curTask);
+        }
     }
 }
