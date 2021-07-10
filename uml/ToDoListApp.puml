@@ -1,27 +1,114 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+class ToDoListMain {
+    main()
+    start()
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+class ToDoListController {
+    + @FXML mainPane: BorderPane
+    + @FXML splitPane: SplitPane
+    + @FXML errorLabel: Label
+    + @FXML selectDate: DatePicker
+    + @FXML editDate: DatePicker
+    + @FXML descriptionText: TextField
+    + @FXML editDescription: TextField
+    + @FXML addButton: Button
+    + @FXML deleteButton: Button
+    + @FXML markCompleteButton: Button
+    + @FXML editTaskButton: Button
+    + @FXML clearButton: Button
+    + @FXML taskList: ListView<NewTask>
+    + @FXML completedList: ListView<NewTask>
+    + fileChooser: FileChooser
+    + curTask: NewTask
+    + newStage: Stage
+
+    + @FXML initialize()
+    + @FXML saveToExternal()
+    + @FXML loadFromExternal()
+    + @FXML displayAll()
+    + @FXML displayComplete()
+    + @FXML displayIncomplete()
+    + @FXML addButtonClicked()
+    + @FXML deleteButtonClicked()
+    + @FXML markTaskCompleteClicked()
+    + @FXML editButtonClicked()
+    + @FXML clearButtonClicked()
+    + @FXML confirmEditClicked()
+    + launchEditWindow()
+    + printError()
 }
+
+class NewTask {
+    - date: LocalDate
+    - description: String
+    - isComplete: boolean
+
+    + NewTask(description, date)
+    + getDate(): LocalDate
+    + setDate(date)
+    + getDescription(): String
+    + setDescription(description)
+    + isCompleted(): boolean
+    + setCompleted(isComplete)
+}
+
+class AddTask {
+    + addNewTask()
+    + inputIsValid(): boolean
+    + commitNewTask()
+    + errorMessage()
+}
+
+class DeleteTask {
+    + deleteSelectedTask()
+}
+
+class MarkComplete {
+    + markTaskComplete()
+}
+
+class DisplayList {
+    + displayAll()
+    + displayComplete()
+    + displayIncomplete()
+}
+
+class ClearList {
+    + clearAll()
+}
+
+class EditTask {
+    + editCurTask()
+    + inputIsValid(): boolean
+}
+
+class SaveList {
+    + saveFile()
+}
+
+class LoadList {
+    + openFile()
+}
+
+javafx.Application <|-- ToDoListMain
+ToDoListMain - ToDoListController
+'Need to indicate that ToDoListController is able to open EditTaskWindow
+ToDoListController - AddTask
+ToDoListController - DeleteTask
+ToDoListController - MarkComplete
+ToDoListController -- EditTask
+ToDoListController - ClearList
+ToDoListController -- DisplayList
+ToDoListController -- SaveList
+ToDoListController -- LoadList
+NewTask --- AddTask
+NewTask --- DeleteTask
+NewTask --- MarkComplete
+NewTask - EditTask
+NewTask --- ClearList
+NewTask - SaveList
 
 @enduml

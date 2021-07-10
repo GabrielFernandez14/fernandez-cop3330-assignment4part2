@@ -1,4 +1,5 @@
 # Help Window
+### Gabriel Fernandez COP3330
 #### For Rey, who just wanted to do a better job at destroying  
 #### our sanity by suggesting that we include this
 ### Using the Add Button
@@ -52,4 +53,12 @@ The Display Incomplete menu item, upon being selected, only displays the current
 incomplete items, which are represented by the To-Do table.
 
 ### Using the File Menu
-
+In the file menu, the user can choose to save the contents of the list they have created
+as an executable .jar file in their computer using the File Explorer.
+#### Save
+Upon pressing this button, the file explorer on the user's computer will be opened, allowing
+the user to choose where they want to save their To-Do list. The list will be an executable
+.jar file, which the user can then access any time and open as they wish.
+#### Open
+This button simply opens the file explorer, allowing the user to go to the directory where
+they saved the file, and open it via selecting the file and pressing open.

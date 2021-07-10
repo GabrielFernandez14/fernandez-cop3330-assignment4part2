@@ -17,7 +17,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -57,6 +60,7 @@ public class ToDoListController {
     public ObservableList<NewTask> list = FXCollections.observableArrayList();
     public ObservableList<NewTask> completed = FXCollections.observableArrayList();
 
+    public FileChooser fileChooser = new FileChooser();
     public NewTask curTask = null;
     public final Stage newStage = new Stage();
 
@@ -66,18 +70,23 @@ public class ToDoListController {
         selectDate.setValue(LocalDate.now());
         descriptionText.setText("");
         errorLabel.setText("");
+        fileChooser.setInitialDirectory(new File("user.home"));
         // I tried to make the SplitPane divider uneditable
         // but couldn't figure it out :/
         // Node divider = splitPane.lookup(".split-pane-divider");
         // divider.setMouseTransparent(true);
     }
 
+    // ToDo NOT WORKING
     @FXML
     public void saveToExternal(ActionEvent actionEvent) {
+        SaveList save = new SaveList();
+        save.saveFile(mainPane, fileChooser);
     }
 
     @FXML
     public void loadFromExternal(ActionEvent actionEvent) {
+        // Can't really make a load method when your save method isn't working
     }
 
     @FXML
@@ -128,7 +137,7 @@ public class ToDoListController {
         complete.markTaskComplete(list, taskList, completed, completedList);
     }
 
-    // NOT WORKING
+    // ToDo program crashes
     @FXML
     public void editButtonClicked() {
         if (taskList.getSelectionModel().getSelectedItem() != null) {
@@ -139,13 +148,12 @@ public class ToDoListController {
             launchEditWindow();
         }
         else {
-            printError(errorLabel, "Error: You must select a task before you can edit.");
+            printError("Error: You must select a task before you can edit.");
         }
     }
 
-    // NOT WORKING
+    // ToDo Not launching for some reason
     public void launchEditWindow() {
-
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull
                     (getClass().getResource("EditTaskWindow.fxml")));
@@ -170,12 +178,12 @@ public class ToDoListController {
         clear.clearAll(list, taskList, completed, completedList);
     }
 
-    public void printError(Label errorLabel, String prompt) {
+    public void printError(String prompt) {
         errorLabel.setText(prompt);
         errorLabel.setTextFill(Color.RED);
     }
 
-    // NOT WORKING
+    // ToDo NOT WORKING
     @FXML
     public void confirmEditClicked(ActionEvent actionEvent) {
         EditTask edit = new EditTask();
