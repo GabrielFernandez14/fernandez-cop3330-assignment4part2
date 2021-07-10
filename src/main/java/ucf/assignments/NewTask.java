@@ -39,6 +39,7 @@ public class NewTask implements Serializable {
         this.description = description;
     }
 
+    // getter and setter for boolean completed
     public boolean isCompleted() {
         return isComplete;
     }
@@ -47,6 +48,7 @@ public class NewTask implements Serializable {
         this.isComplete = isComplete;
     }
 
+    // Return the value as a string for the ListView method
     @Override
     public String toString() {
         return date.toString() + "\t||\t"+ description;

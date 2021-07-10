@@ -90,7 +90,7 @@ class SaveList {
 }
 
 class LoadList {
-    + openFile()
+    + loadFromFile()
 }
 
 javafx.Application <|-- ToDoListMain

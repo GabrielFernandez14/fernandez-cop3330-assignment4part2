@@ -9,7 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 
 public class DeleteTask {
-    // Delete the selected task
+
     public void deleteSelectedTask(ObservableList<NewTask> list, ListView<NewTask> taskList,
                                    ObservableList<NewTask> completedList,
                                    ListView<NewTask>taskCompletedList) {

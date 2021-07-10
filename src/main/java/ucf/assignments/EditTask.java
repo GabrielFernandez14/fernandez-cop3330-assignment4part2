@@ -6,24 +6,10 @@
 package ucf.assignments;
 
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
-import javafx.scene.control.cell.TextFieldListCell;
-import javafx.stage.Stage;
-
 import java.time.LocalDate;
-import java.util.Objects;
-
-import java.io.IOException;
-import java.util.Objects;
 
 public class EditTask {
 
@@ -31,14 +17,18 @@ public class EditTask {
                             ListView<NewTask> listView, TextField description,
                             DatePicker date, NewTask curTask) {
         if (inputIsValid(description, date)) {
+            // Add the updated value to the current list
             list.add(new NewTask(description.getText(), date.getValue()));
+            // Remove the old value from the list
             list.remove(curTask);
+            // update the list
             listView.setItems(list);
         }
     }
 
     // Check that the input provided is valid
     public boolean inputIsValid(TextField description, DatePicker date) {
+        // Check that the date is not in the past
         if (date.getValue().isBefore(LocalDate.now())) {
             return false;
         }

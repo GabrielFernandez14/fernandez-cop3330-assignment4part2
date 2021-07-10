@@ -37,6 +37,8 @@ so the item that is currently inside the To-Do table will be moved to the Comple
 Pressing this button clears all data inside of both the To-Do and Completed tables.
 
 ### Editing the Tables
+**DOES NOT WORK**
+
 The user can edit the table's contents by first selecting an item within either table,
 then pressing the Edit Task button. This will open a new window where the user can then
 input their desired changes, and confirm the edit with a Confirm button.
@@ -53,6 +55,8 @@ The Display Incomplete menu item, upon being selected, only displays the current
 incomplete items, which are represented by the To-Do table.
 
 ### Using the File Menu
+**SAVING (and therefore loading) IS NOT POSSIBLE**
+
 In the file menu, the user can choose to save the contents of the list they have created
 as an executable .jar file in their computer using the File Explorer.
 #### Save

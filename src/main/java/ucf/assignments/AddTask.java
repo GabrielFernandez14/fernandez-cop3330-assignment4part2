@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import java.lang.String;
-
 import java.time.LocalDate;
 
 public class AddTask {
