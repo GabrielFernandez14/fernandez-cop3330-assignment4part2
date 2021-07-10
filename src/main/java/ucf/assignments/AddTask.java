@@ -15,11 +15,13 @@ public class AddTask {
 
     public void addNewTask(ListView<NewTask> taskList,
                            TextField description, DatePicker date,
-                           Label errorLabel, ObservableList<NewTask> list) {
+                           Label errorLabel, ObservableList<NewTask> list,
+                           NewTask editedTask) {
+        errorLabel.setText("");
         // Check that input from TextField is valid
         if (inputIsValid(errorLabel, description, date)) {
             // Add the task to the TableView
-            commitNewTask(errorLabel, taskList, description, date, list);
+            commitNewTask(errorLabel, taskList, description, date, list, editedTask);
         }
     }
 
@@ -47,13 +49,23 @@ public class AddTask {
     // Add the data to the list
     public void commitNewTask(Label errorLabel, ListView<NewTask> taskList,
                               TextField description, DatePicker date,
-                              ObservableList<NewTask> list) {
-        // Add the data to an ArrayList
-        list.add(new NewTask(description.getText(), date.getValue()));
-        // Add the ArrayList data to the ListView
+                              ObservableList<NewTask> list, NewTask editTask) {
+        // If a editTask is not null, we are editing something
+        if (editTask != null) {
+            // set the values inside the selected task to the current ones
+            // inside the TextField and DatePicker
+            list.remove(editTask);
+            editTask.setDate(date.getValue());
+            editTask.setDescription(description.getText());
+            list.add(editTask);
+        }
+        else {
+            // Add the data to the list
+            list.add(new NewTask(description.getText(), date.getValue()));
+        }
+        // Add the NewTask item to the listview
         taskList.setItems(list);
-        // Reset the value inside of the TextField and DataPicker to today's date
-        // for new input
+        // Reset values as needed
         description.setText("");
         errorMessage(errorLabel,"");
         date.setValue(LocalDate.now());

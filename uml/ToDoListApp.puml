@@ -37,7 +37,6 @@ class ToDoListController {
     + @FXML editButtonClicked()
     + @FXML clearButtonClicked()
     + @FXML confirmEditClicked()
-    + launchEditWindow()
     + printError()
 }
 
@@ -82,7 +81,6 @@ class ClearList {
 
 class EditTask {
     + editCurTask()
-    + inputIsValid(): boolean
 }
 
 class SaveList {

@@ -9,19 +9,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import javafx.stage.FileChooser;
 import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Objects;
 
 public class ToDoListController {
     // Declare all FXML variables as public
@@ -49,12 +43,7 @@ public class ToDoListController {
     public ListView<NewTask> taskList;
     @FXML
     public ListView<NewTask> completedList;
-    @FXML
-    public DatePicker editDate;
-    @FXML
-    public TextField editDescription;
-    @FXML
-    public Button confirmEditButton;
+
 
     // Create two ObservableLists, one for the To-Do column, and the other for completed
     public ObservableList<NewTask> list = FXCollections.observableArrayList();
@@ -63,8 +52,6 @@ public class ToDoListController {
     // Make other variables as needed
     public FileChooser fileChooser = new FileChooser();
     public NewTask curTask = null;
-    public final Stage newStage = new Stage();
-
 
     // Set initial values for TextFields and FileChooser etc.
     @FXML
@@ -80,6 +67,7 @@ public class ToDoListController {
     // ToDo NOT WORKING
     @FXML
     public void saveToExternal(ActionEvent actionEvent) {
+        errorLabel.setText("");
         // Create a new instance of class SaveList
         SaveList save = new SaveList();
         // call saveFile()
@@ -89,6 +77,8 @@ public class ToDoListController {
     // ToDo Empty method
     @FXML
     public void loadFromExternal(ActionEvent actionEvent) {
+        errorLabel.setText("");
+
         // Can't really make a load method when your save method isn't working
         // Create a new instance of class LoadList
         LoadList load = new LoadList();
@@ -98,6 +88,8 @@ public class ToDoListController {
 
     @FXML
     public void displayAll(ActionEvent actionEvent) {
+        errorLabel.setText("");
+
         // Create a new instance of class DisplayList
         DisplayList display = new DisplayList();
         // call displayAll()
@@ -106,6 +98,8 @@ public class ToDoListController {
 
     @FXML
     public void displayComplete(ActionEvent actionEvent) {
+        errorLabel.setText("");
+
         // Create a new instance of class DisplayList
         DisplayList display = new DisplayList();
         // call displayComplete()
@@ -114,6 +108,8 @@ public class ToDoListController {
 
     @FXML
     public void displayIncomplete(ActionEvent actionEvent) {
+        errorLabel.setText("");
+
         // Create a new instance of class DisplayList
         DisplayList display = new DisplayList();
         // call displayIncomplete()
@@ -122,14 +118,24 @@ public class ToDoListController {
 
     @FXML
     public void addButtonClicked(ActionEvent actionEvent) {
+        errorLabel.setText("");
+
+        markCompleteButton.setDisable(false);
+        deleteButton.setDisable(false);
+        clearButton.setDisable(false);
         // Create a new instance of AddTask Class
         AddTask task = new AddTask();
         // Call addNewTask() function inside of AddTask
-        task.addNewTask(taskList, descriptionText, selectDate, errorLabel, list);
+        task.addNewTask(taskList, descriptionText, selectDate,
+                errorLabel, list, curTask);
+
+        curTask = null;
     }
 
     @FXML
     public void deleteButtonClicked(ActionEvent actionEvent) {
+        errorLabel.setText("");
+
         // Create a new instance of class DeleteTask
         DeleteTask delete = new DeleteTask();
         // Call deleteSelectedTask() inside of the class
@@ -138,45 +144,12 @@ public class ToDoListController {
 
     @FXML
     public void markTaskCompleteClicked(ActionEvent actionEvent) {
+        errorLabel.setText("");
+
         // Create a new instance of class MarkComplete
         MarkComplete complete = new MarkComplete();
         // call markTaskComplete() function
         complete.markTaskComplete(list, taskList, completed, completedList);
-    }
-
-    // ToDo program crashes
-    @FXML
-    public void editButtonClicked() {
-        // Check if an item is selected, if true, then launch the edit window
-        if (taskList.getSelectionModel().getSelectedItem() != null) {
-            launchEditWindow();
-        }
-        else if (completedList.getSelectionModel().getSelectedItem() != null &&
-                taskList.getSelectionModel().getSelectedItem() == null) {
-            launchEditWindow();
-        }
-        else {
-            printError("Error: You must select a task before you can edit.");
-        }
-    }
-
-    // ToDo Crashing for some reason
-    public void launchEditWindow() {
-        // Open EditTaskWindow.fxml and crash if there is an issue
-        try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull
-                    (getClass().getResource("EditTaskWindow.fxml")));
-
-            Scene scene = new Scene(root);
-
-            newStage.setScene(scene);
-            newStage.setTitle("Edit Task");
-            newStage.setResizable(false);
-            newStage.show();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
@@ -187,28 +160,34 @@ public class ToDoListController {
         clear.clearAll(list, taskList, completed, completedList);
     }
 
-    public void printError(String prompt) {
-        // Set whatever the prompt says to the TextField
-        errorLabel.setText(prompt);
-        errorLabel.setTextFill(Color.RED);
-    }
-
-    // ToDo NOT ACCESSIBLE (EditTaskWindow.fxml is not being launched)
     @FXML
-    public void confirmEditClicked(ActionEvent actionEvent) {
+    public void editButtonClicked(ActionEvent actionEvent) {
+        errorLabel.setText("");
+
         // Create a new instance of class EditTask
         EditTask edit = new EditTask();
 
         // Check whether the current item is in the To-Do column or Completed column
         if (taskList.getSelectionModel().getSelectedItem() != null) {
-            // Set a curTask value as theh item and pass it into editCurTask() function
+            markCompleteButton.setDisable(true);
+            deleteButton.setDisable(true);
+            clearButton.setDisable(true);
+            // Set a curTask value as the item and pass it into editCurTask() function
             curTask = taskList.getSelectionModel().getSelectedItem();
-            edit.editCurTask(list, taskList, editDescription, editDate, curTask);
+            edit.editCurTask(descriptionText, selectDate, curTask);
+            //add.addNewTask(taskList, descriptionText, selectDate, errorLabel, list);
         }
-        else if (completedList.getSelectionModel().getSelectedItem() != null &&
-                taskList.getSelectionModel().getSelectedItem() != null) {
-            curTask = completedList.getSelectionModel().getSelectedItem();
-            edit.editCurTask(completed, completedList, editDescription, editDate,  curTask);
+        else if (completedList.getSelectionModel().getSelectedItem() != null) {
+            printError("Error: Cannot edit a completed task.");
         }
+        else {
+            printError("Error: You must select a task before you can edit.");
+        }
+    }
+
+    public void printError(String prompt) {
+        // Set whatever the prompt says to the TextField
+        errorLabel.setText(prompt);
+        errorLabel.setTextFill(Color.RED);
     }
 }

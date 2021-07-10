@@ -37,11 +37,14 @@ so the item that is currently inside the To-Do table will be moved to the Comple
 Pressing this button clears all data inside of both the To-Do and Completed tables.
 
 ### Editing the Tables
-**DOES NOT WORK**
+The user can edit a task via selecting a task from the To-Do table and pressing the edit
+button. Tasks selected from the completed table can not be edited due to the fact they are
+already complete.
 
-The user can edit the table's contents by first selecting an item within either table,
-then pressing the Edit Task button. This will open a new window where the user can then
-input their desired changes, and confirm the edit with a Confirm button.
+Upon selecting a task and pressing the Edit button, the contents of the task that was
+selected will appear in the DatePicker and the TextField, where the user can then update them
+as they wish. Once content with their changes. The user can press the Add Task button,
+and see the edited task be added to the bottom of the To-Do table.
 
 ### Using the Display Menu
 #### Display All
