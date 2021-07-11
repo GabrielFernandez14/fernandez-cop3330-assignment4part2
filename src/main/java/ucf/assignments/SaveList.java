@@ -6,18 +6,16 @@
 package ucf.assignments;
 
 import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
 public class SaveList {
 
-    public String saveFile(ObservableList<NewTask> list, ListView<NewTask> taskList,
-                         ObservableList<NewTask> completedList, ListView<NewTask> taskCompletedList) {
+    public String saveFile() {
+        // Create a new FileChooser
         FileChooser fileChooser = new FileChooser();
 
         //Set extension filter for text files
@@ -28,6 +26,7 @@ public class SaveList {
         //Show save file dialog
         File file = fileChooser.showSaveDialog(null);
 
+        // Return the path that the user selects
         if (file != null) {
             return file.getAbsolutePath();
         }
@@ -37,6 +36,8 @@ public class SaveList {
 
     public static void writeToFile(String path, ObservableList<NewTask> list,
                                    ObservableList<NewTask> completedList) {
+        // Use a BufferedWriter to write the contents of the to-do lists
+        // and completed lists to the previously established .txt file
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(path));
             bw.write("To-Do\n");
@@ -45,7 +46,7 @@ public class SaveList {
                         toDoTask.getDate(), toDoTask.getDescription()));
             }
             bw.write("Completed Tasks\n");
-            for (NewTask completeTask: list) {
+            for (NewTask completeTask: completedList) {
                 bw.write(String.format("%-10s |\t%-10s\n",
                         completeTask.getDate(), completeTask.getDescription()));
             }

@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class ToDoListController {
     // Declare all FXML variables as private
@@ -59,7 +60,6 @@ public class ToDoListController {
         // but couldn't figure it out :/, .setMouseTransparent() wasn't working
     }
 
-    // ToDo NOT WORKING
     @FXML
     public void saveToExternal(ActionEvent actionEvent) {
         errorLabel.setText("");
@@ -67,23 +67,51 @@ public class ToDoListController {
         // Create a new instance of class SaveList
         SaveList save = new SaveList();
         // call saveFile()
-        String getPath = save.saveFile(list, taskList, completed, completedList);
+        String getPath = save.saveFile();
 
+        // Check that the path is not null
         if (!getPath.equals("")) {
+            // write our entire list to the .txt file
             SaveList.writeToFile(getPath, list, completed);
         }
     }
 
-    // ToDo Empty method
     @FXML
     public void loadFromExternal(ActionEvent actionEvent) {
         errorLabel.setText("");
 
-        // Can't really make a load method when your save method isn't working
         // Create a new instance of class LoadList
         LoadList load = new LoadList();
-        // call loadFromFile()
-        load.loadFromFile();
+
+        // Create a FileChooser for opening files
+        String getPath = load.loadFile();
+
+        // Store the data from the file into ArrayList<String> for both
+        // tasks in the to-do column and in the completed
+        ArrayList<String> toDoTasks = LoadList.readToDoTasks(getPath);
+        ArrayList<String> completeTasks = LoadList.readCompleteTasks(getPath);
+
+        // Check that the path is not null
+        if (!getPath.equals("")) {
+            // Loop through the arraylist and convert the data into LocalDate
+            // and String so we can add it as new instance of NewTask
+            for (int i = 0; i < toDoTasks.size(); i++) {
+                LocalDate curDate = readDate(toDoTasks, i);
+                String curDescription = readDescription(toDoTasks, i);
+                // Add the data to the list as a new instance of NewTask
+                list.add(new NewTask(curDescription, curDate));
+            }
+            // Repeat for completed tasks as well
+            for (int i = 0; i < completeTasks.size(); i++) {
+                LocalDate curCompletedDate = readDate(completeTasks, i);
+                String curCompletedDescription = readDescription(completeTasks, i);
+                completed.add(new NewTask(curCompletedDescription, curCompletedDate));
+            }
+        }
+
+        // Set the items to the ListView
+        taskList.setItems(list);
+        completedList.setItems(completed);
     }
 
     @FXML
@@ -189,5 +217,19 @@ public class ToDoListController {
         // Set whatever the prompt says to the TextField
         errorLabel.setText(prompt);
         errorLabel.setTextFill(Color.RED);
+    }
+
+    public LocalDate readDate(ArrayList<String> fileItem, int index) {
+        // Use a regex to distinguish between the date String and the descriptionString
+        String[] split = fileItem.get(index).split("\\|");
+        // return the date String as a LocalDate
+        return LocalDate.parse(split[0].trim());
+    }
+
+    public String readDescription(ArrayList<String> fileItem, int index) {
+        // Use a regex to distinguish between the date String and the descriptionString
+        String[] split = fileItem.get(index).split("\\|");
+        // return the description
+        return split[1].trim();
     }
 }
