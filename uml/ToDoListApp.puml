@@ -7,23 +7,21 @@ class ToDoListMain {
 }
 
 class ToDoListController {
-    + @FXML mainPane: BorderPane
-    + @FXML splitPane: SplitPane
-    + @FXML errorLabel: Label
-    + @FXML selectDate: DatePicker
-    + @FXML editDate: DatePicker
-    + @FXML descriptionText: TextField
-    + @FXML editDescription: TextField
-    + @FXML addButton: Button
-    + @FXML deleteButton: Button
-    + @FXML markCompleteButton: Button
-    + @FXML editTaskButton: Button
-    + @FXML clearButton: Button
-    + @FXML taskList: ListView<NewTask>
-    + @FXML completedList: ListView<NewTask>
-    + fileChooser: FileChooser
+    - @FXML mainPane: BorderPane
+    - @FXML splitPane: SplitPane
+    - @FXML errorLabel: Label
+    - @FXML selectDate: DatePicker
+    - @FXML editDate: DatePicker
+    - @FXML descriptionText: TextField
+    - @FXML editDescription: TextField
+    - @FXML addButton: Button
+    - @FXML deleteButton: Button
+    - @FXML markCompleteButton: Button
+    - @FXML editTaskButton: Button
+    - @FXML clearButton: Button
+    - @FXML taskList: ListView<NewTask>
+    - @FXML completedList: ListView<NewTask>
     + curTask: NewTask
-    + newStage: Stage
     + list: ObservableList<NewTask>
     + completed: ObservableList<NewTask>
 

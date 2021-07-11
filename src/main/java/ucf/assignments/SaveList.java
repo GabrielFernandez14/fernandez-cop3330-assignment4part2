@@ -5,33 +5,55 @@
 
 package ucf.assignments;
 
-import javafx.scene.layout.BorderPane;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
-import javafx.stage.Window;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 public class SaveList {
-    private int counter = 1;
 
-    public void saveFile(BorderPane mainPane, FileChooser fileChooser) {
-        // Use the file chooser to set initial title and file name
-        Window window = mainPane.getScene().getWindow();
+    public String saveFile(ObservableList<NewTask> list, ListView<NewTask> taskList,
+                         ObservableList<NewTask> completedList, ListView<NewTask> taskCompletedList) {
+        FileChooser fileChooser = new FileChooser();
+
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter
+                ("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
         fileChooser.setTitle("Save To-Do List");
-        fileChooser.setInitialFileName("todolist" + counter);
-        counter++;
-        // Create options for user to save file as (jar)
-        fileChooser.getExtensionFilters().addAll
-                (new FileChooser.ExtensionFilter("jar file", ".jar"));
-        // Open the File Explorer and set initial directory
+        //Show save file dialog
+        File file = fileChooser.showSaveDialog(null);
+
+        if (file != null) {
+            return file.getAbsolutePath();
+        }
+
+        return "";
+    }
+
+    public static void writeToFile(String path, ObservableList<NewTask> list,
+                                   ObservableList<NewTask> completedList) {
         try {
-            File file = fileChooser.showSaveDialog(window);
-            fileChooser.setInitialDirectory(file.getParentFile());
-            //TODO save contents of the application somehow
+            BufferedWriter bw = new BufferedWriter(new FileWriter(path));
+            bw.write("To-Do\n");
+            for (NewTask toDoTask: list) {
+                bw.write(String.format("%-10s |\t%-10s\n",
+                        toDoTask.getDate(), toDoTask.getDescription()));
+            }
+            bw.write("Completed Tasks\n");
+            for (NewTask completeTask: list) {
+                bw.write(String.format("%-10s |\t%-10s\n",
+                        completeTask.getDate(), completeTask.getDescription()));
+            }
+            bw.close();
         }
-        // crash if there is an issue
-        catch (Exception ex) {
-            ex.printStackTrace();
+        catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 }

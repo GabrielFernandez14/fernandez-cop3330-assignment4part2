@@ -13,8 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
-import java.io.File;
 import java.time.LocalDate;
 
 public class ToDoListController {
@@ -49,7 +47,6 @@ public class ToDoListController {
     public ObservableList<NewTask> completed = FXCollections.observableArrayList();
 
     // Make other variables as needed
-    public FileChooser fileChooser = new FileChooser();
     public NewTask curTask = null;
 
     // Set initial values for TextFields and FileChooser etc.
@@ -58,7 +55,6 @@ public class ToDoListController {
         selectDate.setValue(LocalDate.now());
         descriptionText.setText("");
         errorLabel.setText("");
-        fileChooser.setInitialDirectory(new File("user.home"));
         // I tried to make the SplitPane divider uneditable
         // but couldn't figure it out :/, .setMouseTransparent() wasn't working
     }
@@ -67,10 +63,15 @@ public class ToDoListController {
     @FXML
     public void saveToExternal(ActionEvent actionEvent) {
         errorLabel.setText("");
+
         // Create a new instance of class SaveList
         SaveList save = new SaveList();
         // call saveFile()
-        save.saveFile(mainPane, fileChooser);
+        String getPath = save.saveFile(list, taskList, completed, completedList);
+
+        if (!getPath.equals("")) {
+            SaveList.writeToFile(getPath, list, completed);
+        }
     }
 
     // ToDo Empty method
