@@ -15,6 +15,7 @@ import java.util.Objects;
 
 public class ToDoListMain extends Application {
 
+    // Launch the javafx application
     public static void main(String[] args) {
         launch(args);
     }

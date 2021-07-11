@@ -18,32 +18,31 @@ import java.io.File;
 import java.time.LocalDate;
 
 public class ToDoListController {
-    // Declare all FXML variables as public
+    // Declare all FXML variables as private
     @FXML
-    public BorderPane mainPane;
+    private BorderPane mainPane;
     @FXML
-    public SplitPane splitPane;
+    private SplitPane splitPane;
     @FXML
-    public Label errorLabel;
+    private Label errorLabel;
     @FXML
-    public DatePicker selectDate;
+    private DatePicker selectDate;
     @FXML
-    public TextField descriptionText;
+    private TextField descriptionText;
     @FXML
-    public Button addButton;
+    private Button addButton;
     @FXML
-    public Button deleteButton;
+    private Button deleteButton;
     @FXML
-    public Button markCompleteButton;
+    private Button markCompleteButton;
     @FXML
-    public Button clearButton;
+    private Button clearButton;
     @FXML
-    public Button editTaskButton;
+    private Button editTaskButton;
     @FXML
-    public ListView<NewTask> taskList;
+    private ListView<NewTask> taskList;
     @FXML
-    public ListView<NewTask> completedList;
-
+    private ListView<NewTask> completedList;
 
     // Create two ObservableLists, one for the To-Do column, and the other for completed
     public ObservableList<NewTask> list = FXCollections.observableArrayList();

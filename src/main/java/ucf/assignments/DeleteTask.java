@@ -13,13 +13,20 @@ public class DeleteTask {
     public void deleteSelectedTask(ObservableList<NewTask> list, ListView<NewTask> taskList,
                                    ObservableList<NewTask> completedList,
                                    ListView<NewTask>taskCompletedList) {
-        // get the highlighted item
-        list.remove(taskList.getSelectionModel().getSelectedItem());
-        completedList.remove(taskCompletedList.getSelectionModel().getSelectedItem());
+        // get the selected item
+        // (If two items are selected, one in each table,
+        // the program prioritizes the one in the To-Do list)
+        if (taskList.getSelectionModel().getSelectedItem() != null) {
+            list.remove(taskList.getSelectionModel().getSelectedItem());
+        }
+        else if (taskCompletedList.getSelectionModel().getSelectedItem() != null
+                && taskList.getSelectionModel().getSelectedItem() == null) {
+            completedList.remove(taskCompletedList.getSelectionModel().getSelectedItem());
+        }
         // update the ListView
         taskList.refresh();
         taskCompletedList.refresh();
-        // reset the selection for future selections
+        // reset the selections that were made
         taskList.getSelectionModel().clearSelection();
         taskCompletedList.getSelectionModel().clearSelection();
     }

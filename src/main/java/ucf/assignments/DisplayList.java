@@ -25,7 +25,7 @@ public class DisplayList {
         if(divider!=null){
             divider.setStyle("-fx-background-color: transparent;");
         }
-        // set the SplitPane divider to 1
+        // set the SplitPane divider to 0
         sp.setDividerPosition(0, 0f);
     }
 
@@ -35,7 +35,7 @@ public class DisplayList {
         if(divider!=null){
             divider.setStyle("-fx-background-color: transparent;");
         }
-        // set the SplitPane divider to 0
+        // set the SplitPane divider to 1
         sp.setDividerPosition(0, 1f);
     }
 }

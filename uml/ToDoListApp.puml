@@ -24,20 +24,22 @@ class ToDoListController {
     + fileChooser: FileChooser
     + curTask: NewTask
     + newStage: Stage
+    + list: ObservableList<NewTask>
+    + completed: ObservableList<NewTask>
 
-    + @FXML initialize()
-    + @FXML saveToExternal()
-    + @FXML loadFromExternal()
-    + @FXML displayAll()
-    + @FXML displayComplete()
-    + @FXML displayIncomplete()
-    + @FXML addButtonClicked()
-    + @FXML deleteButtonClicked()
-    + @FXML markTaskCompleteClicked()
-    + @FXML editButtonClicked()
-    + @FXML clearButtonClicked()
-    + @FXML confirmEditClicked()
-    + printError()
+    + @FXML initialize(ActionEvent)
+    + @FXML saveToExternal(ActionEvent)
+    + @FXML loadFromExternal(ActionEvent)
+    + @FXML displayAll(ActionEvent)
+    + @FXML displayComplete(ActionEvent)
+    + @FXML displayIncomplete(ActionEvent)
+    + @FXML addButtonClicked(ActionEvent)
+    + @FXML deleteButtonClicked(ActionEvent)
+    + @FXML markTaskCompleteClicked(ActionEvent)
+    + @FXML editButtonClicked(ActionEvent)
+    + @FXML clearButtonClicked(ActionEvent)
+    + @FXML confirmEditClicked(ActionEvent)
+    + printError(String)
 }
 
 class NewTask {
@@ -55,32 +57,32 @@ class NewTask {
 }
 
 class AddTask {
-    + addNewTask()
-    + inputIsValid(): boolean
-    + commitNewTask()
-    + errorMessage()
+    + addNewTask(taskList, descriptionText, selectDate, errorLabel, list, curTask)
+    + inputIsValid(errorLabel, descriptionText, selectDate): boolean
+    + commitNewTask(errorLabel, taskList, descriptionText, selectDate, list, curTask)
+    + errorMessage(errorLabel, String)
 }
 
 class DeleteTask {
-    + deleteSelectedTask()
+    + deleteSelectedTask(list, taskList, completed, completedList)
 }
 
 class MarkComplete {
-    + markTaskComplete()
+    + markTaskComplete(list, taskList, completedList, completed)
 }
 
 class DisplayList {
-    + displayAll()
-    + displayComplete()
-    + displayIncomplete()
+    + displayAll(splitPane)
+    + displayComplete(splitPane)
+    + displayIncomplete(splitPane)
 }
 
 class ClearList {
-    + clearAll()
+    + clearAll(list, taskList, completedList, completed)
 }
 
 class EditTask {
-    + editCurTask()
+    + editCurTask(descriptionText, selectDate, curTask)
 }
 
 class SaveList {
@@ -93,7 +95,6 @@ class LoadList {
 
 javafx.Application <|-- ToDoListMain
 ToDoListMain - ToDoListController
-'Need to indicate that ToDoListController is able to open EditTaskWindow
 ToDoListController - AddTask
 ToDoListController - DeleteTask
 ToDoListController - MarkComplete
