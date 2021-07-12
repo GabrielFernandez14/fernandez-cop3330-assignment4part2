@@ -1,7 +1,6 @@
 # Help Window
 ### Gabriel Fernandez COP3330
-#### For Rey, who just wanted to do a better job at destroying  
-#### our sanity by suggesting that we include this
+#### For Rey, who is cool
 ### Using the Add Button
 In order to use the Add button, the user must have selected a date
 that is not before the current date. Additionally, the user must have
