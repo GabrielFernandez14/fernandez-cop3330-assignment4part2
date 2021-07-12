@@ -1,6 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
 
+'Sorry this looks terrible; bad solution = bad uml
 class ToDoListMain {
     main()
     start()
@@ -38,6 +39,9 @@ class ToDoListController {
     + @FXML clearButtonClicked(ActionEvent)
     + @FXML confirmEditClicked(ActionEvent)
     + printError(String)
+    + readDate(ArrayList<String>, int): LocalDate
+    + readDescription(ArrayList<String>, int): String
+
 }
 
 class NewTask {
@@ -84,23 +88,27 @@ class EditTask {
 }
 
 class SaveList {
-    + saveFile()
+    + saveFile(): String
+    + writeToFile(String, list, completed)
 }
 
 class LoadList {
-    + loadFromFile()
+    + loadFile(): String
+    + readToDoTasks(String): ArrayList<String>
+    + readCompleteTasks(String): ArrayList<String>
 }
 
 javafx.Application <|-- ToDoListMain
 ToDoListMain - ToDoListController
 ToDoListController - AddTask
-ToDoListController - DeleteTask
-ToDoListController - MarkComplete
+ToDoListController -- DeleteTask
+ToDoListController -- MarkComplete
 ToDoListController -- EditTask
 ToDoListController - ClearList
-ToDoListController -- DisplayList
-ToDoListController -- SaveList
-ToDoListController -- LoadList
+ToDoListController - DisplayList
+ToDoListController - SaveList
+ToDoListController - LoadList
+ToDoListController o--- NewTask
 NewTask --- AddTask
 NewTask --- DeleteTask
 NewTask --- MarkComplete

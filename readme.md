@@ -21,7 +21,8 @@ Once the user has highlighted the desired item they wish to delete, they can pre
 it from the table.
 
 _Note: Due to the fact that there are two tables, and both tables can have one item highlighted at any
-given time, it is possible to delete an item in the To-Do table and Completed table simultaneously_
+given time, if the user has two items selected, the program will prioritize deleting the one inside of 
+the To-Do table._
 
 ### The Mark (In)Complete Button
 As the name implies, this button is capable of transferring the selected data
@@ -38,7 +39,7 @@ Pressing this button clears all data inside of both the To-Do and Completed tabl
 
 ### Editing the Tables
 The user can edit a task via selecting a task from the To-Do table and pressing the edit
-button. Tasks selected from the completed table can not be edited due to the fact they are
+button. Tasks selected from the completed table cannot be edited due to the fact they are
 already complete.
 
 Upon selecting a task and pressing the Edit button, the contents of the task that was
@@ -58,14 +59,15 @@ The Display Incomplete menu item, upon being selected, only displays the current
 incomplete items, which are represented by the To-Do table.
 
 ### Using the File Menu
-**SAVING (and therefore loading) IS NOT POSSIBLE**
-
 In the file menu, the user can choose to save the contents of the list they have created
-as an executable .jar file in their computer using the File Explorer.
+as a .txt file in their computer using a File Chooser.
 #### Save
 Upon pressing this button, the file explorer on the user's computer will be opened, allowing
-the user to choose where they want to save their To-Do list. The list will be an executable
-.jar file, which the user can then access any time and open as they wish.
+the user to choose where they want to save their To-Do list. The list will be saved as a neatly
+formatted .txt, with headers differentiating between To-Do items and Completed items of the list.
+These .txt files are now accessible to the user in wherever they decided to save it on to their computer.
 #### Open
-This button simply opens the file explorer, allowing the user to go to the directory where
-they saved the file, and open it via selecting the file and pressing open.
+This button also opens the file explorer, giving the user the option to find where they stored
+the previous .txt file of the list they had saved. The user can then navigate to the .txt of the list
+they want to open. Upon pressing the open button in the file explorer, the contents of the To-Do and
+Completed tables will be updated to reflect that of which is inside of the .txt file.

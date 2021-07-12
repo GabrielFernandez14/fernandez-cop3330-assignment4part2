@@ -93,6 +93,10 @@ public class ToDoListController {
 
         // Check that the path is not null
         if (!getPath.equals("")) {
+            // clear the current stuff that is inside the list to make room for
+            // the file's data
+            list.clear();
+            completed.clear();
             // Loop through the arraylist and convert the data into LocalDate
             // and String so we can add it as new instance of NewTask
             for (int i = 0; i < toDoTasks.size(); i++) {

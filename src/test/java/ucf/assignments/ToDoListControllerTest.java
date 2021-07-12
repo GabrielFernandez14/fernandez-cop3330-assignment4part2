@@ -22,18 +22,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class ToDoListControllerTest {
 
     @Test
-    void saveToExternal() {
-        boolean actual = true;
-        assertTrue(actual);
-    }
-
-    @Test
-    void loadFromExternal() {
-        boolean actual = true;
-        assertTrue(actual);
-    }
-
-    @Test
     void displayAll_check_that_the_divider_of_the_split_pane_is_half() {
         // Create a new instance of DisplayList
         // call the displayAll() function
